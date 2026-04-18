@@ -8,28 +8,34 @@ import {
 
 const timeline = [
   {
-    year: "2024–PRESENT",
-    title: "BUILDING MY PORTFOLIO",
+    year: "2026–PRESENT",
+    title: "BUILDING MY ARCLOOM",
     description:
-      "Creating modern portfolio websites with Next.js, React, and GSAP animations.",
+      "An application about ERD and PRD that helps visualize and plan software projects with the power of AI.",
   },
   {
-    year: "2023",
-    title: "DISCOVERED WEB DEVELOPMENT",
+    year: "2025-2026",
+    title: "PORTOFOLIO WEBSITE",
     description:
-      "Started learning PHP and TailwindCSS. Built first projects with Laravel and Alpine.js.",
+      "Designed and developed this portfolio website using Next.js, TailwindCSS, and GSAP for animations. Showcasing projects, skills, and journey in a modern and interactive way.",
   },
   {
-    year: "2022",
-    title: "WEB DEVELOPMENT BEGINS",
+    year: "2026",
+    title: "YELLOW DRINK POS WEBSITE",
     description:
-      "Learned HTML, CSS, and JavaScript. Built first e-commerce platform with PHP and MySQL.",
+      "Built a responsive e-commerce website for a local UMKM business using Laravel and TailwindCSS. a POS system for order management and inventory tracking.",
+  },
+  {
+    year: "2024",
+    title: "INTRODUCTION TO WEB DEVELOPMENT",
+    description:
+      "Started learning web development with HTML, CSS, and JavaScript. Built simple static websites and explored frontend.",
   },
   {
     year: "ONGOING",
     title: "CONTINUOUS LEARNING",
     description:
-      "Always exploring new technologies and improving skills in game development too.",
+      "Always exploring new technologies and improving skills in web development and game development too.",
   },
 ];
 
