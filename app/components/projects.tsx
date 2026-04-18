@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { animateProjectCards } from "@/app/lib/gsap-animations";
 import Link from "next/link";
+import { link } from "fs";
 
 const projects = [
   {
@@ -33,6 +34,7 @@ const projects = [
     title: "PORTFOLIO V2",
     subtitle: "RESPONSIVE DESIGN",
     tech: ["JAVASCRIPT", "TAILWINDCSS", "ALPINE.JS"],
+    link: "https://kafkhabian.vercel.app/",
   },
   {
     id: 5,
@@ -40,6 +42,7 @@ const projects = [
     title: "PORTFOLIO V1",
     subtitle: "FIRST ITERATION",
     tech: ["LARAVEL", "TAILWINDCSS", "ALPINE.JS"],
+    link: "https://korqsz.vercel.app/",
   },
   {
     id: 6,
