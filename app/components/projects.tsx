@@ -51,7 +51,7 @@ const projects = [
     slug: "collect-stars-game",
     title: "COLLECT STARS GAME",
     subtitle: "INTERACTIVE GAME",
-    tech: ["UNITY", "C++"],
+    tech: ["UNITY", "C#"],
     link: "https://play.unity.com/en/games/3d8bb510-ef2f-4d7d-a6ae-ee02276f0d1f/website-kafff",
   },
 ];
