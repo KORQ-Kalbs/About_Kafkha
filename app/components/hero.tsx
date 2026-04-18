@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section
       id="hero-section"
-      className="relative min-h-screen w-full bg-black text-white pt-32 pb-20 grid-bg overflow-hidden"
+      className="relative w-full bg-black text-white pt-32 pb-20 grid-bg overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-12 h-full flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

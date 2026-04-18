@@ -60,7 +60,7 @@ export default function Projects() {
   return (
     <section
       id="projects-section"
-      className="relative min-h-screen w-full bg-white text-black py-20 grid-bg-dark"
+      className="relative w-full bg-white text-black py-20 grid-bg-dark"
     >
       <div className="max-w-7xl mx-auto px-12">
         {/* Section Title - Broken Grid */}
