@@ -98,7 +98,7 @@ export default function Contact() {
           >
             SEND EMAIL
           </a>
-          <p className="text-sm font-body text-black/60">KORQSZ@PROTON.ME</p>
+          <p className="text-sm font-body text-black/60">Korqsz@proton.me</p>
         </div>
 
         {/* Divider */}
