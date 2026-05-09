@@ -35,7 +35,7 @@ const projects = [
     slug: "personal-v2",
     title: "PORTFOLIO V2",
     subtitle: "RESPONSIVE DESIGN",
-    tech: ["JAVASCRIPT", "TAILWINDCSS", "ALPINE.JS"],
+    tech: ["NEXT.JS", "TAILWINDCSS", "GSAP"],
     link: "https://kafkhabian.vercel.app/",
   },
   {
@@ -43,7 +43,7 @@ const projects = [
     slug: "personal-v1",
     title: "PORTFOLIO V1",
     subtitle: "FIRST ITERATION",
-    tech: ["LARAVEL", "TAILWINDCSS", "ALPINE.JS"],
+    tech: ["HTML", "CSS", "JAVASCRIPT"],
     link: "https://korqsz.vercel.app/",
   },
   {
