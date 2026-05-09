@@ -54,6 +54,14 @@ const projects = [
     tech: ["UNITY", "C#"],
     link: "https://play.unity.com/en/games/3d8bb510-ef2f-4d7d-a6ae-ee02276f0d1f/website-kafff",
   },
+  {
+    id: 7,
+    slug: "pkl-notes-app",
+    title: "PKL NOTES APP",
+    subtitle: "PRODUCTIVITY TOOL",
+    tech: ["NEXT.JS", "TAILWINDCSS", "SUPABASE"],
+    link: "https://pkl-notes.vercel.app/",
+  },
 ];
 
 export default function Projects() {
