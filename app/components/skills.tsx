@@ -1,147 +1,81 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
-  animateSkillItems,
-  animateFloatingBadges,
+  animateSectionHeading,
+  animateSkillGroups,
 } from "@/app/lib/gsap-animations";
+import { SectionWrapper } from "@/app/components/SectionWrapper";
+import { SkillChip } from "@/app/components/SkillChip";
 
-const skillCategories = {
-  advanced: ["HTML", "CSS", "TAILWINDCSS", "BOOTSTRAP", "PHP"],
-  intermediate: ["LARAVEL", "JAVASCRIPT", "REACT"],
-  beginner: ["NEXT.JS", "GSAP"],
-  tools: [
-    "GITHUB",
-    "NPM",
-    "MYSQL",
-    "VS CODE",
-    "COMPOSER",
-    "PGSQL",
-    "FIGMA",
-    "UNITY",
-  ],
-};
+const skills = [
+  {
+    category: "Frontend",
+    items: [
+      "HTML",
+      "CSS",
+      "TailwindCSS",
+      "Bootstrap",
+      "JavaScript",
+      "React",
+      "Next.js",
+      "GSAP",
+    ],
+  },
+  {
+    category: "Backend",
+    items: ["PHP", "Laravel"],
+  },
+  {
+    category: "Database",
+    items: ["MySQL", "PostgreSQL"],
+  },
+  {
+    category: "Tools",
+    items: ["GitHub", "NPM", "Composer", "VS Code", "Figma", "Unity"],
+  },
+];
 
 export default function Skills() {
+  const headingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const headingTween = headingRef.current
+      ? animateSectionHeading(headingRef.current)
+      : null;
+    const groupTween = animateSkillGroups();
+
+    return () => {
+      headingTween?.scrollTrigger?.kill();
+      headingTween?.kill();
+      groupTween?.scrollTrigger?.kill();
+      groupTween?.kill();
+    };
+  }, []);
+
   return (
-    <section
-      id="skills-section"
-      className="relative min-h-screen w-full bg-white text-black py-20 grid-bg-dark"
-    >
-      <div className="max-w-7xl mx-auto px-12">
-        {/* Section Title */}
-        <div className="mb-20 space-y-4">
-          <h2 className="text-5xl lg:text-6xl font-heading font-bold tracking-tight">
-            TECH STACK
-          </h2>
-          <div className="border-t-2 border-black w-32" />
-        </div>
-
-        {/* Skills Grid - 4 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-          {/* Advanced */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-heading font-bold tracking-wider uppercase border-b-2 border-black pb-4">
-              ADVANCED
-            </h3>
-            <div className="space-y-3">
-              {skillCategories.advanced.map((skill) => (
-                <div
-                  key={skill}
-                  className="skill-item text-sm font-body text-black/80 flex items-start gap-2"
-                >
-                  <span className="text-black font-bold">●</span>
-                  <span className="font-bold tracking-wide">{skill}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Intermediate */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-heading font-bold tracking-wider uppercase border-b-2 border-black pb-4">
-              INTERMEDIATE
-            </h3>
-            <div className="space-y-3">
-              {skillCategories.intermediate.map((skill) => (
-                <div
-                  key={skill}
-                  className="skill-item text-sm font-body text-black/80 flex items-start gap-2"
-                >
-                  <span className="text-black font-bold">●</span>
-                  <span className="font-bold tracking-wide">{skill}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Beginner */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-heading font-bold tracking-wider uppercase border-b-2 border-black pb-4">
-              LEARNING
-            </h3>
-            <div className="space-y-3">
-              {skillCategories.beginner.map((skill) => (
-                <div
-                  key={skill}
-                  className="skill-item text-sm font-body text-black/80 flex items-start gap-2"
-                >
-                  <span className="text-black font-bold">●</span>
-                  <span className="font-bold tracking-wide">{skill}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tools */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-heading font-bold tracking-wider uppercase border-b-2 border-black pb-4">
-              TOOLS
-            </h3>
-            <div className="space-y-3">
-              {skillCategories.tools.map((tool) => (
-                <div
-                  key={tool}
-                  className="skill-item text-sm font-body text-black/80 flex items-start gap-2"
-                >
-                  <span className="text-black font-bold">●</span>
-                  <span className="font-bold tracking-wide">{tool}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Floating Badges - Scattered */}
-        <div className="relative h-48 mb-20">
-          <div className="floating-badge absolute top-2 left-50 px-4 py-2 border-2 border-black text-black text-xs font-bold tracking-widest uppercase">
-            Currently Learning
-          </div>
-          <div className="floating-badge absolute top-10 right-100 px-4 py-2 border-2 border-[#f61500] text-[#f61500] text-xs font-bold tracking-widest uppercase">
-            Laravel
-          </div>
-          <div className="floating-badge absolute top-32 right-32 px-4 py-2 border-2 border-[#ff00ff] text-[#ff00ff] text-xs font-bold tracking-widest uppercase">
-            REACT
-          </div>
-          <div className="floating-badge absolute bottom-10 left-1/3 px-4 py-2 border-2 border-[#00ffff] text-[#00ffff] text-xs font-bold tracking-widest uppercase">
-            NEXT.JS
-          </div>
-        </div>
-
-        {/* Focus Area */}
-        <div className="border-2 border-black p-8 bg-white">
-          <p className="text-sm leading-relaxed">
-            <span className="font-bold tracking-widest uppercase">
-              ▪ PRIMARY FOCUS ▪
-            </span>
-            <br />
-            Expanding frontend expertise, and experience with React,
-            TailwindCSS, GSAP, and Next.js. Building production-ready
-            applications with modern JavaScript frameworks and optimization best
-            practices.
-          </p>
-        </div>
+    <SectionWrapper id="skills">
+      <div ref={headingRef} className="section-heading">
+        <p className="text-xs font-medium tracking-widest text-charcoal-muted mb-3">
+          Stack
+        </p>
+        <h2 className="text-2xl font-medium text-charcoal mb-12">
+          What I work with
+        </h2>
       </div>
-    </section>
+
+      {skills.map((group) => (
+        <div key={group.category} className="skill-group mb-8">
+          <p className="text-xs font-medium tracking-widest text-charcoal-muted mb-4">
+            {group.category}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {group.items.map((item) => (
+              <SkillChip key={item} label={item} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </SectionWrapper>
   );
 }

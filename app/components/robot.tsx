@@ -301,15 +301,7 @@ export default function Robot() {
       />
       <div
         ref={hitboxRef}
-        className="absolute pointer-events-auto touch-none cursor-grab active:cursor-grabbing"
-        style={{
-          width: 72,
-          height: 72,
-          marginLeft: -36,
-          marginTop: -36,
-          top: 0,
-          left: 0,
-        }}
+        className="absolute pointer-events-auto touch-none cursor-grab active:cursor-grabbing w-[72px] h-[72px] -ml-[36px] -mt-[36px] top-0 left-0"
         title="Drag the pixel robot!"
       />
     </div>

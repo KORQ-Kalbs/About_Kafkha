@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { animateSectionHeading } from "@/app/lib/gsap-animations";
+import { SectionWrapper } from "./SectionWrapper";
 
 export default function Contact() {
+  const headingRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,6 +15,17 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const headingTween = headingRef.current
+      ? animateSectionHeading(headingRef.current)
+      : null;
+
+    return () => {
+      headingTween?.scrollTrigger?.kill();
+      headingTween?.kill();
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -57,139 +71,101 @@ export default function Contact() {
   };
 
   return (
-    <section
-      id="contact-section"
-      className="relative w-full bg-white text-black pt-20 pb-40 grid-bg-dark flex flex-col items-center justify-center"
-    >
-      <div className="max-w-2xl mx-auto px-6 lg:px-12 w-full">
-        {/* Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight mb-4">
-            LET'S CREATE
-          </h2>
-          <p className="text-lg font-heading tracking-wide uppercase text-black/60">
-            SOMETHING TOGETHER
-          </p>
-        </div>
-
-        {/* Success Message */}
-        {submitted && (
-          <div className="mb-8 p-4 bg-green-50 border-2 border-green-500 text-green-700 rounded">
-            <p className="font-bold">✓ Message sent successfully!</p>
-            <p className="text-sm">
-              Thank you for reaching out. I'll get back to you soon.
-            </p>
-          </div>
-        )}
-
-        {/* Error Message */}
-        {error && (
-          <div className="mb-8 p-4 bg-red-50 border-2 border-red-500 text-red-700 rounded">
-            <p className="font-bold">✗ Error</p>
-            <p className="text-sm">{error}</p>
-          </div>
-        )}
-
-        {/* Email CTA */}
-        <div className="text-center mb-16">
-          <a
-            href="mailto:Korqsz@proton.me"
-            className="btn-neon inline-block mb-8 hover:shadow-[0_0_30px_#ff00ff]"
-          >
-            SEND EMAIL
-          </a>
-          <p className="text-sm font-body text-black/60">Korqsz@proton.me</p>
-        </div>
-
-        {/* Divider */}
-        <div className="border-t-2 border-black my-16" />
-
-        {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-6 mb-16">
-          <div>
-            <label className="text-xs font-bold tracking-widest uppercase text-black/50 block mb-2">
-              NAME
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              className="w-full px-4 py-3 border-2 border-black bg-white text-black font-body focus:outline-none focus:border-[#ff00ff] transition disabled:opacity-50 disabled:cursor-not-allowed"
-              placeholder="Your name"
-            />
-          </div>
-
-          <div>
-            <label className="text-xs font-bold tracking-widest uppercase text-black/50 block mb-2">
-              EMAIL
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              className="w-full px-4 py-3 border-2 border-black bg-white text-black font-body focus:outline-none focus:border-[#ff00ff] transition disabled:opacity-50 disabled:cursor-not-allowed"
-              placeholder="your@email.com"
-            />
-          </div>
-
-          <div>
-            <label className="text-xs font-bold tracking-widest uppercase text-black/50 block mb-2">
-              MESSAGE
-            </label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              rows={6}
-              className="w-full px-4 py-3 border-2 border-black bg-white text-black font-body focus:outline-none focus:border-[#ff00ff] transition resize-none disabled:opacity-50 disabled:cursor-not-allowed"
-              placeholder="Your message here..."
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full btn-neon py-4 hover:shadow-[0_0_30px_#ff00ff] disabled:opacity-50 disabled:cursor-not-allowed transition"
-          >
-            {loading ? "SENDING..." : "SEND MESSAGE"}
-          </button>
-        </form>
-
-        {/* CTA Button */}
-        <div className="text-center">
-          <div className="contact-cta flex flex-wrap justify-center gap-4">
-            <a
-              href="https://github.com/KORQ-Kalbs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-neon inline-block hover:shadow-[0_0_30px_#ff00ff]"
-            >
-              GITHUB
-            </a>
-            <a
-              href="https://linkedin.com/in/kafkha-yasin-albian-676b42369/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-neon inline-block hover:shadow-[0_0_30px_#ff00ff]"
-            >
-              LINKEDIN
-            </a>
-          </div>
-        </div>
-
-        {/* Footer Message */}
-        <p className="text-center text-xs font-body text-black/50 mt-12">
-          Based in Bogor Barat, Indonesia • Always open to new opportunities
+    <SectionWrapper id="contact">
+      <div ref={headingRef} className="section-heading">
+        <p className="text-xs font-medium tracking-widest text-charcoal-muted mb-3">
+          Contact
+        </p>
+        <h2 className="text-2xl font-medium text-charcoal mb-3">
+          Let's create something together
+        </h2>
+        <p className="text-base text-charcoal-muted mb-10 max-w-md">
+          Have a project in mind or just want to say hi? My inbox is always
+          open.
         </p>
       </div>
-    </section>
+
+      {submitted && (
+        <div className="mb-6 rounded-xl border border-cream-border bg-cream-surface p-4 text-sm text-charcoal-muted">
+          <p className="font-medium text-charcoal">Message sent.</p>
+          <p>Thank you for reaching out. I'll get back to you soon.</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="mb-6 rounded-xl border border-cream-border bg-cream-surface p-4 text-sm text-charcoal-muted">
+          <p className="font-medium text-accent">Something went wrong.</p>
+          <p>{error}</p>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-xl">
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          disabled={loading}
+          placeholder="Your name"
+          className="border border-cream-border bg-transparent rounded-xl px-4 py-3 text-charcoal placeholder:text-charcoal-muted focus:border-accent focus:outline-none transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        />
+
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          disabled={loading}
+          placeholder="your@email.com"
+          className="border border-cream-border bg-transparent rounded-xl px-4 py-3 text-charcoal placeholder:text-charcoal-muted focus:border-accent focus:outline-none transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        />
+
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+          disabled={loading}
+          rows={5}
+          placeholder="What's on your mind?"
+          className="border border-cream-border bg-transparent rounded-xl px-4 py-3 text-charcoal placeholder:text-charcoal-muted focus:border-accent focus:outline-none transition-colors resize-none disabled:opacity-60 disabled:cursor-not-allowed"
+        />
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-charcoal text-cream rounded-xl px-8 py-3 text-sm font-medium w-fit hover:bg-accent transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {loading ? "Sending..." : "Send message ->"}
+        </button>
+      </form>
+
+      <div className="mt-8 flex items-center gap-6 text-sm text-charcoal-muted">
+        <a
+          href="mailto:korqsz@proton.me"
+          className="hover:text-accent transition-colors"
+        >
+          korqsz@proton.me
+        </a>
+        <a
+          href="https://github.com/kafkha"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-accent transition-colors"
+        >
+          GitHub {"->"}
+        </a>
+        <a
+          href="https://linkedin.com/in/kafkha"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-accent transition-colors"
+        >
+          LinkedIn {"->"}
+        </a>
+      </div>
+    </SectionWrapper>
   );
 }

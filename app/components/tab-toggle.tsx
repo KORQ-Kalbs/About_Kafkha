@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 export type TabOption<TTabId extends string = string> = {
   id: TTabId;
   label: string;
@@ -22,7 +20,7 @@ export default function TabToggle<TTabId extends string>({
 }: TabToggleProps<TTabId>) {
   return (
     <div
-      className={`inline-flex w-fit items-center justify-center rounded-full border-2 border-white bg-black p-1 ${className}`}
+      className={`inline-flex w-fit items-center justify-center rounded-full border border-cream-border bg-cream-surface p-1 ${className}`}
     >
       {tabs.map((tab) => {
         const isActive = tab.id === activeTab;
@@ -34,18 +32,13 @@ export default function TabToggle<TTabId extends string>({
             role="tab"
             aria-selected={isActive}
             onClick={() => onTabChange(tab.id)}
-            className={`relative min-w-[7.5rem] rounded-full px-5 py-3 text-xs font-bold uppercase tracking-[0.25em] transition-colors sm:text-sm ${
-              isActive ? "text-black" : "text-white/55 hover:text-white"
+            className={`min-w-[7.5rem] rounded-full px-5 py-2 text-sm font-medium tracking-wide transition-colors ${
+              isActive
+                ? "bg-cream text-charcoal"
+                : "text-charcoal-muted hover:text-charcoal"
             }`}
           >
-            {isActive ? (
-              <motion.div
-                layoutId="tab-toggle-indicator"
-                className="absolute inset-0 rounded-full bg-white shadow-[0_0_0_1px_rgba(255,255,255,0.85)]"
-                transition={{ type: "spring", stiffness: 420, damping: 34 }}
-              />
-            ) : null}
-            <span className="relative z-10 block text-center">{tab.label}</span>
+            {tab.label}
           </button>
         );
       })}

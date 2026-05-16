@@ -1,245 +1,79 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import TabToggle, { type TabOption } from "./tab-toggle";
-
-const timeline = [
-  {
-    year: "2026–PRESENT",
-    title: "BUILDING MY ARCLOOM",
-    description:
-      "An application about ERD and PRD that helps visualize and plan software projects with the power of AI.",
-  },
-  {
-    year: "2025-2026",
-    title: "PORTOFOLIO WEBSITE",
-    description:
-      "Designed and developed this portfolio website using Next.js, TailwindCSS, and GSAP for animations. Showcasing projects, skills, and journey in a modern and interactive way.",
-  },
-  {
-    year: "2026",
-    title: "YELLOW DRINK POS WEBSITE",
-    description:
-      "Built a responsive e-commerce website for a local UMKM business using Laravel and TailwindCSS. a POS system for order management and inventory tracking.",
-  },
-  {
-    year: "2024",
-    title: "INTRODUCTION TO WEB DEVELOPMENT",
-    description:
-      "Started learning web development with HTML, CSS, and JavaScript. Built simple static websites and explored frontend.",
-  },
-  {
-    year: "ONGOING",
-    title: "CONTINUOUS LEARNING",
-    description:
-      "Always exploring new technologies and improving skills in web development and game development too.",
-  },
-];
-
-const sectionTabs: TabOption<SectionId>[] = [
-  { id: "about", label: "About Me" },
-  { id: "journey", label: "Journey" },
-];
-
-type SectionId = "about" | "journey";
-
-function AboutPanel() {
-  return (
-    <motion.div
-      key="about-panel"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -12 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="space-y-12"
-    >
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:items-start">
-        <div className="space-y-8 lg:col-span-2">
-          <div className="space-y-4 text-base leading-relaxed">
-            <p>
-              I&apos;m <span className="font-bold">KAFKHA YASIN ALBIAN</span>, a
-              high school student based in{" "}
-              <span className="font-bold">BOGOR BARAT, INDONESIA</span>,
-              passionate about web development and design.
-            </p>
-            <p className="text-white/80">
-              I believe in building exceptional digital experiences that are not
-              only visually stunning but also performant and user-friendly. My
-              journey into web development started with curiosity and has
-              evolved into genuine passion.
-            </p>
-            <p className="text-white/80">
-              Currently, I&apos;m focused on mastering modern JavaScript
-              frameworks like <span className="font-bold">REACT</span> and{" "}
-              <span className="font-bold">NEXT.JS</span> to take my frontend
-              skills to the next level.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 border-t-2 border-white pt-8 sm:grid-cols-2">
-            <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/50">
-                EMAIL
-              </p>
-              <a
-                href="mailto:Korqsz@proton.me"
-                className="text-sm font-bold text-[#ff00ff] hover:underline"
-              >
-                KORQSZ@PROTON.ME
-              </a>
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/50">
-                LOCATION
-              </p>
-              <p className="text-sm font-bold">BOGOR BARAT, ID</p>
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/50">
-                GITHUB
-              </p>
-              <a
-                href="https://github.com/KORQ-Kalbs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-bold text-[#ff00ff] hover:underline"
-              >
-                @KORQ-KALBS
-              </a>
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/50">
-                EDUCATION
-              </p>
-              <p className="text-sm font-bold">HIGH SCHOOL STUDENT</p>
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/50">
-                LINKEDIN
-              </p>
-              <a
-                href="https://linkedin.com/in/kafkha-yasin-albian-676b42369/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-bold text-[#ff00ff] hover:underline"
-              >
-                KAFKHA YASIN
-              </a>
-            </div>
-            <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/50">
-                EXPERIENCE
-              </p>
-              <p className="text-sm font-bold">1+ YEAR IN WEB DEVELOPMENT</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="hidden lg:block relative h-96">
-          {/* PixelArt component is now fixed globally */}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function JourneyPanel() {
-  return (
-    <motion.div
-      key="journey-panel"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -12 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="mb-20"
-    >
-      <h3 className="mb-12 border-b-2 border-white pb-6 text-2xl font-heading font-bold tracking-wider uppercase">
-        JOURNEY
-      </h3>
-
-      <div className="space-y-0 relative">
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-white" />
-
-        {timeline.map((item, index) => (
-          <div
-            key={index}
-            className="pb-12 relative"
-            style={{ paddingLeft: "13px" }}
-          >
-            <div className="timeline-dot absolute -left-4 top-2 w-7 h-7 rounded-full border-2 border-white bg-black flex items-center justify-center">
-              <div className="w-2 h-2 bg-white rounded-full" />
-            </div>
-
-            <div className="space-y-2">
-              <p className="text-xs font-bold tracking-widest uppercase text-white/50">
-                {item.year}
-              </p>
-              <h4 className="text-lg font-heading font-bold tracking-wide uppercase timeline-text ">
-                {item.title}
-              </h4>
-              <p className="text-sm text-white/70 leading-relaxed timeline-text">
-                {item.description}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="border-2 border-white p-6 sm:p-8">
-        <p className="mb-4 text-xs font-bold uppercase tracking-widest text-white/50">
-          INTERESTS &amp; HOBBIES
-        </p>
-        <div className="flex flex-wrap gap-3">
-          {[
-            "WEB DEVELOPMENT",
-            "UI/UX DESIGN",
-            "GAME DEVELOPMENT",
-            "OPEN SOURCE",
-            "INNOVATION",
-            "CREATIVITY",
-          ].map((interest) => (
-            <span
-              key={interest}
-              className="cursor-default border border-white px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors hover:bg-white hover:text-black"
-            >
-              {interest}
-            </span>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+import { useEffect, useRef } from "react";
+import { animateSectionHeading } from "@/app/lib/gsap-animations";
+import { SectionWrapper } from "./SectionWrapper";
 
 export default function About() {
-  const [activeSection, setActiveSection] = useState<SectionId>("about");
+  const headingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const headingTween = headingRef.current
+      ? animateSectionHeading(headingRef.current)
+      : null;
+
+    return () => {
+      headingTween?.scrollTrigger?.kill();
+      headingTween?.kill();
+    };
+  }, []);
 
   return (
-    <section
-      id="about-section"
-      className="relative min-h-screen w-full bg-black py-20 text-white grid-bg about-grid"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <div className="mb-10 space-y-4 sm:mb-14 lg:mb-16">
-          <h2 className="text-5xl font-heading font-bold tracking-tight lg:text-6xl">
-            ABOUT ME
-          </h2>
-          <div className="w-32 border-t-2 border-white" />
-        </div>
-
-        <div className="mb-10 flex justify-center sm:mb-12">
-          <TabToggle
-            tabs={sectionTabs}
-            activeTab={activeSection}
-            onTabChange={(tabId) => setActiveSection(tabId)}
-            className="mx-auto"
-          />
-        </div>
-
-        <AnimatePresence mode="wait" initial={false}>
-          {activeSection === "about" ? <AboutPanel /> : <JourneyPanel />}
-        </AnimatePresence>
+    <SectionWrapper id="about">
+      <div ref={headingRef} className="section-heading">
+        <p className="text-xs font-medium tracking-widest text-charcoal-muted mb-3">
+          About
+        </p>
+        <h2 className="text-2xl font-medium text-charcoal mb-8">
+          A bit about me
+        </h2>
       </div>
-    </section>
+
+      <p className="text-base leading-relaxed text-charcoal-muted max-w-xl mb-8">
+        I'm a high school student from Bogor Barat, Indonesia who fell in love
+        with building things on the web. I started with pure HTML and CSS, and
+        now I'm working my way through React, Next.js, and GSAP. When I'm not
+        coding, I'm probably playing games or exploring new design ideas.
+      </p>
+
+      <ul className="flex flex-col gap-3 text-base text-charcoal-muted">
+        {[
+          { emoji: "🎓", text: "High school student" },
+          { emoji: "📍", text: "Based in Bogor Barat, Indonesia" },
+          { emoji: "🌱", text: "Currently mastering React & Next.js" },
+          { emoji: "🎮", text: "Gamer on the side" },
+        ].map(({ emoji, text }) => (
+          <li key={text} className="flex items-center gap-3">
+            <span>{emoji}</span>
+            <span>{text}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-10 flex items-center gap-6 text-sm text-charcoal-muted">
+        <a
+          href="mailto:korqsz@proton.me"
+          className="hover:text-accent transition-colors"
+        >
+          korqsz@proton.me
+        </a>
+        <a
+          href="https://github.com/kafkha"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-accent transition-colors"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/kafkha"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-accent transition-colors"
+        >
+          LinkedIn
+        </a>
+      </div>
+    </SectionWrapper>
   );
 }

@@ -1,138 +1,119 @@
 "use client";
 
-import { useEffect } from "react";
-import { animateProjectCards } from "@/app/lib/gsap-animations";
-import Link from "next/link";
-import { link } from "fs";
+import { useEffect, useRef } from "react";
+import {
+  animateProjectCards,
+  animateSectionHeading,
+} from "@/app/lib/gsap-animations";
+import { SectionWrapper } from "./SectionWrapper";
+import { SkillChip } from "./SkillChip";
 
 const projects = [
   {
-    id: 1,
-    slug: "yellow-drink",
-    title: "YELLOW DRINK",
-    subtitle: "POS SYSTEM",
-    tech: ["LARAVEL", "MYSQL", "TAILWINDCSS"],
-    link: "",
+    name: "Yellow Drink",
+    description: "A point-of-sale system for managing orders and inventory.",
+    tags: ["Laravel", "MySQL", "TailwindCSS"],
+    link: "#",
   },
   {
-    id: 2,
-    slug: "takoyakin",
-    title: "TAKOYAKIN",
-    subtitle: "ONLINE SHOP",
-    tech: ["HTML", "CSS", "JAVASCRIPT"],
-    link: "https://produktif-tako.vercel.app/",
+    name: "Takoyaki",
+    description: "A simple online shop with product browsing and cart flow.",
+    tags: ["HTML", "CSS", "JavaScript"],
+    link: "#",
   },
   {
-    id: 3,
-    slug: "arcloom",
-    title: "ARCLOOM",
-    subtitle: "ERD & PRD APPLICATION",
-    tech: ["LARAVEL", "TAILWINDCSS", "MERMAIDJS", "REACT", "PGSQL"],
-    link: "",
+    name: "Arcloom",
+    description: "An ERD & PRD generation tool using AI-powered diagramming.",
+    tags: ["Laravel", "React", "TailwindCSS", "MermaidJS", "PostgreSQL"],
+    link: "#",
   },
   {
-    id: 4,
-    slug: "personal-v2",
-    title: "PORTFOLIO V2",
-    subtitle: "RESPONSIVE DESIGN",
-    tech: ["NEXT.JS", "TAILWINDCSS", "GSAP"],
-    link: "https://kafkhabian.vercel.app/",
+    name: "Portfolio V2",
+    description: "This site - rebuilt with Next.js, Tailwind, and GSAP.",
+    tags: ["Next.js", "TailwindCSS", "GSAP"],
+    link: "#",
   },
   {
-    id: 5,
-    slug: "personal-v1",
-    title: "PORTFOLIO V1",
-    subtitle: "FIRST ITERATION",
-    tech: ["HTML", "CSS", "JAVASCRIPT"],
-    link: "https://korqsz.vercel.app/",
+    name: "Portfolio V1",
+    description:
+      "My first portfolio - built from scratch with vanilla web tech.",
+    tags: ["HTML", "CSS", "JavaScript"],
+    link: "#",
   },
   {
-    id: 6,
-    slug: "collect-stars-game",
-    title: "COLLECT STARS GAME",
-    subtitle: "INTERACTIVE GAME",
-    tech: ["UNITY", "C#"],
-    link: "https://play.unity.com/en/games/3d8bb510-ef2f-4d7d-a6ae-ee02276f0d1f/website-kafff",
+    name: "Collect Stars",
+    description: "A small interactive game built in Unity.",
+    tags: ["Unity", "C#"],
+    link: "#",
   },
   {
-    id: 7,
-    slug: "pkl-notes-app",
-    title: "PKL NOTES APP",
-    subtitle: "PRODUCTIVITY TOOL",
-    tech: ["NEXT.JS", "TAILWINDCSS", "SUPABASE"],
-    link: "https://pkl-notes.vercel.app/",
+    name: "PKL Notes",
+    description: "A productivity tool for note-taking during internship.",
+    tags: ["Next.js", "TailwindCSS", "Supabase"],
+    link: "#",
   },
 ];
 
 export default function Projects() {
+  const headingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const headingTween = headingRef.current
+      ? animateSectionHeading(headingRef.current)
+      : null;
+    const cardsTween = animateProjectCards();
+
+    return () => {
+      headingTween?.scrollTrigger?.kill();
+      headingTween?.kill();
+      cardsTween?.scrollTrigger?.kill();
+      cardsTween?.kill();
+    };
+  }, []);
+
   return (
-    <section
-      id="projects-section"
-      className="relative w-full bg-white text-black py-20 grid-bg-dark"
-    >
-      <div className="max-w-7xl mx-auto px-12">
-        {/* Section Title - Broken Grid */}
-        <div className="mb-20 space-y-4">
-          <h2 className="text-5xl lg:text-6xl font-heading font-bold tracking-tight">
-            SELECTED WORK
-          </h2>
-          <div className="border-t-2 border-black w-32" />
-        </div>
-
-        {/* Projects Grid - 3 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {projects.map((project) => (
-            <a
-              key={project.id}
-              href={project.link || `/project/${project.slug}`}
-              target={project.link ? "_blank" : undefined}
-              rel={project.link ? "noopener noreferrer" : undefined}
-              className="project-card group relative border-2 border-black p-0 hover:border-[#ff00ff] transition-all duration-300 cursor-pointer"
-            >
-              {/* Project Header */}
-              <div className="p-6 border-b-2 border-black bg-white">
-                <h3 className="text-xl font-heading font-bold tracking-wider uppercase mb-2 group-hover:text-[#ff00ff] transition">
-                  {project.title}
-                </h3>
-                <p className="text-xs font-bold tracking-widest uppercase text-black/60">
-                  {project.subtitle}
-                </p>
-              </div>
-
-              {/* Tech Stack */}
-              <div className="p-6 space-y-4 bg-white">
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs font-bold tracking-widest uppercase border border-black/40 px-3 py-1 group-hover:border-[#ff00ff] group-hover:text-[#ff00ff] transition"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Link Arrow */}
-                <div className="pt-4 text-[#ff00ff] font-bold text-sm group-hover:translate-x-2 transition-transform">
-                  EXPLORE →
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        {/* View All CTA */}
-        <div className="border-t-2 border-black pt-12 text-center">
-          <a
-            href="https://github.com/KORQ-Kalbs"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-neon inline-block"
-          >
-            VIEW ALL ON GITHUB →
-          </a>
-        </div>
+    <SectionWrapper id="works">
+      <div ref={headingRef} className="section-heading">
+        <p className="text-xs font-medium tracking-widest text-charcoal-muted mb-3">
+          Work
+        </p>
+        <h2 className="text-2xl font-medium text-charcoal mb-10">
+          Selected projects
+        </h2>
       </div>
-    </section>
+
+      <div className="project-grid grid grid-cols-1 md:grid-cols-2 gap-5">
+        {projects.map((project) => (
+          <div
+            key={project.name}
+            className="project-card bg-cream-surface border border-cream-border rounded-2xl p-6 flex flex-col gap-4 group hover:border-accent transition-colors duration-200"
+          >
+            <div className="flex items-start justify-between">
+              <h3 className="text-lg font-medium text-charcoal">
+                {project.name}
+              </h3>
+              <a
+                href={project.link}
+                className="text-charcoal-muted group-hover:text-accent transition-colors text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Explore {"->"}
+              </a>
+            </div>
+
+            <p className="text-sm leading-relaxed text-charcoal-muted">
+              {project.description}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mt-auto">
+              {project.tags.map((tag) => (
+                <SkillChip key={tag} label={tag} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </SectionWrapper>
   );
 }
